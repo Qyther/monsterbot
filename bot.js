@@ -6,7 +6,13 @@ const client = new Discord.Client();
 // Test if the bot is ready to launch
 client.on("ready", () => {
   console.log("Yee-aah, Less go!");
-  client.user.setGame("m.help for help");
+  bot.user.setPresence({
+        game: {
+            name: 'Type m.help for help',
+            type: 0
+        }
+    });
+});
 });
 
 listenin = 0;
