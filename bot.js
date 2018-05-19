@@ -6,13 +6,6 @@ const client = new Discord.Client();
 // Test if the bot is ready to launch
 client.on("ready", () => {
   console.log("Yee-aah, Less go!");
-  bot.user.setPresence({
-        game: {
-            name: 'Type m.help for help',
-            type: 0
-        }
-    });
-});
 });
 
 listenin = 0;
@@ -35,15 +28,15 @@ client.on("message", msg => {
     return;
   }
   // Test if command is called and otherwise cut off
-  if (!msg.content.toLowerCase().startsWith("m.")) return;
+  if (!msg.content.toLowerCase().startsWith("t.")) return;
   // Getting the cmd tolowercase
-  var cmd = msg.contentoLowerCase();
+  var cmd = msg.content.toLowerCase();
   // Deleting user's message
   msg.delete();
 
 
   // Eval command
-  if (cmd.startsWith("m.eval") && msg.author.id === "294926892321210374") {
+  if (cmd.startsWith("t.eval") && msg.author.id === "294926892321210374") {
     //Set true
     listenin = 1;
     //Cut off
@@ -51,9 +44,9 @@ client.on("message", msg => {
   }
 
   // Calc command
-  if (cmd.startsWith("m.calc")) {
+  if (cmd.startsWith("t.calc")) {
     //Get sum
-    var sum = msg.content.toLowerCase().split("m.calc ")[1];
+    var sum = msg.content.toLowerCase().split("t.calc ")[1];
     //Calculate
     if (sum.match(/[a-z]/)) return msg.reply("Please enter a valid sum!");
     try {
@@ -66,7 +59,7 @@ client.on("message", msg => {
   }
 
   // Say command
-  if (cmd.startsWith("m.say")) {
+  if (cmd.startsWith("t.say")) {
     //Fetch message
     var message = msg.content.split(" ");
     var msgs = [];
@@ -82,7 +75,7 @@ client.on("message", msg => {
   }
 
   // Message command
-  if (cmd.startsWith("m.message")) {
+  if (cmd.startsWith("t.message")) {
     //Get user
     var user = msg.mentions.members.first();
 
@@ -101,26 +94,26 @@ client.on("message", msg => {
   }
 
   // Help command
-  if (cmd.startsWith("m.help")) {
+  if (cmd.startsWith("t.help")) {
     //Make an embed
     const embed = new Discord.RichEmbed()
   .setTitle("")
-  .setAuthor("-MonsterCave Help-", msg.author.avatarURL)
+  .setAuthor("-TW Help-", msg.author.avatarURL)
   .setColor(0x00AE86)
   .setDescription("Check down here for help!")
-  .setFooter("-MonsterCave Help-")
+  .setFooter("-TW Help-")
   .setThumbnail(msg.author.avatarURL)
   .setTimestamp()
   .addField("Administrative commands:",
-    "m.purge [amount] - Deletes [amount] messages.\nm.mute [user] - Makes [user] unable to send a message.\nm.unmute [user] - Makes [user] able to send a message.\nm.ban [user] [days] [reason] - Bans [user] for [days] days for [reason]\nm.unban [id] - Unbans user by id\nm.kick [user] [reason] - Kicks [user] for [reason]\nm.eval - Executes next message(Only owner of bot!)")
-  .addField("Social commands:", "m.calc [sum] - Calculates [sum]\nm.say [message] - Makes the bot say [message]\nm.message [user] [message] - Messages [user] [message] privately", true);
+    "t.purge [amount] - Deletes [amount] messages.\nt.mute [user] - Makes [user] unable to send a message.\nt.unmute [user] - Makes [user] able to send a message.\nt.ban [user] [days] [reason] - Bans [user] for [days] days for [reason]\nt.unban [id] - Unbans user by id\nt.kick [user] [reason] - Kicks [user] for [reason]\nt.eval - Executes next message(Only owner of bot!)")
+  .addField("Social commands:", "t.calc [sum] - Calculates [sum]\nt.say [message] - Makes the bot say [message]\nt.message [user] [message] - Messages [user] [message] privately", true);
   //Send it
   msg.channel.send({embed});
   //Cut off
     return;
   }
   // Purge command
-  if (cmd.startsWith("m.purge ") && msg.member.permissions.has("MANAGE_MESSAGES")) {
+  if (cmd.startsWith("t.purge ") && msg.member.permissions.has("MANAGE_MESSAGES")) {
     //Get amount of messages to be deleted
     var cm = parseInt(cmd.split(" ")[1]);
     //Testing if amount is valid
@@ -133,7 +126,7 @@ client.on("message", msg => {
     return;
   }
   // Mute command
-  if (cmd.startsWith("m.mute") && msg.member.permissions.has("MANAGE_MESSAGES")) {
+  if (cmd.startsWith("t.mute") && msg.member.permissions.has("MANAGE_MESSAGES")) {
     //Get user
 
     var user = msg.mentions.members.first();
@@ -150,7 +143,7 @@ client.on("message", msg => {
   }
 
   // Unmute command
-  if (cmd.startsWith("m.unmute") && msg.member.permissions.has("MANAGE_MESSAGES")) {
+  if (cmd.startsWith("t.unmute") && msg.member.permissions.has("MANAGE_MESSAGES")) {
     //Get user
 
     var user = msg.mentions.members.first();
@@ -165,7 +158,7 @@ client.on("message", msg => {
   }
 
   // Ban command
-  if (cmd.startsWith("m.ban") && msg.member.permissions.has("BAN_MEMBERS")) {
+  if (cmd.startsWith("t.ban") && msg.member.permissions.has("BAN_MEMBERS")) {
     //Get user
 
     var user = msg.mentions.members.first();
@@ -194,7 +187,7 @@ client.on("message", msg => {
   }
 
   // Unban command
-  if (cmd.startsWith("m.unban") && msg.member.permissions.has("BAN_MEMBERS")) {
+  if (cmd.startsWith("t.unban") && msg.member.permissions.has("BAN_MEMBERS")) {
     //Get id
     var id = msg.content.split(" ")[1];
 
@@ -209,7 +202,7 @@ client.on("message", msg => {
   }
 
   // Kick command
-  if (cmd.startsWith("m.kick") && msg.member.permissions.has("KICK_MEMBERS")) {
+  if (cmd.startsWith("t.kick") && msg.member.permissions.has("KICK_MEMBERS")) {
     var user = msg.mentions.members.first();
     //Test if user exists
     if (!user) return msg.reply("Please mention a user!");
@@ -233,4 +226,4 @@ client.on("message", msg => {
 }
 });
 
-client.login("NDM1ODMzMzQ0OTQ5NzQ3NzEy.DbetfQ.pX-gFAdRrmcaDuzRdyV0cYNpjio");
+client.login(Process.ENV.BOT_TOKEN);
